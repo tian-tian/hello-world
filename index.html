@@ -53,6 +53,7 @@
       transform: rotateZ(0deg);
       position: absolute;
       z-index: 2;
+      cursor: pointer;
     }
     
     .circle{
@@ -101,7 +102,7 @@
       <div class="container">
       <div class="content pause" id="content">
         <div class="needle"></div>
-        <div class="photo" ></div>
+        <div class="photo" id="photo"></div>
         <div class="circle circle1"></div>
         <div class="circle circle2"></div>
       </div>
@@ -110,6 +111,14 @@
     </div>
     <script>
       var music = document.getElementById('music');
+      var photo = document.getElementById('photo');
+      photo.addEventListener('click',function(){
+        if (music.paused || music.ended) {
+          music.play();
+        } else {
+          music.pause();
+        }
+      });
       var content = document.getElementById('content');
       music.addEventListener('play',function(){
         content.setAttribute('class','content');
