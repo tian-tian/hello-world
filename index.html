@@ -7,46 +7,118 @@
     <meta name="description" content="Hello-world : test">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Hello-world</title>
+  
+    <title>你能听见吗</title>
+    <style>
+    .stage{
+      position: relative;
+      padding: 1px;
+    }
+    
+    .container{
+      width: 800px;
+      position: relative;
+      margin: 70px auto 0;
+    }
+    
+    .content{
+      width: 300px;
+      height: 250px;
+      margin: 0 auto;
+      position: relative;
+      background: url("play_disc.png") 50% 50%/76% no-repeat;
+    }
+    
+    .needle{
+      width: 100px;
+      height: 120px;
+      background: url("play_needle.png") 0 0/75% no-repeat;
+      position: absolute;
+      top: -68px;
+      left: 130px;
+      transform-origin: 18px 18px;
+      transition: all 0.5s;
+    }
+    
+    .pause .needle{
+      transform: rotateZ(-25deg);
+    }
+    
+    .photo{
+      background: url("tkk.jpg") no-repeat;
+      width: 150px;
+      height: 150px;
+      margin: 50px 0 20px 75px;
+      border-radius: 50%;
+      /*box-shadow: 0px 0px 20px 3px #888888;*/
+      -webkit-animation: rotate1 15s  linear infinite;
+      transform: rotateZ(0deg);
+      position: absolute;
+      z-index: 2;
+    }
+    
+    .circle{
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+      top: 50px;
+      left: 75px;
+      border: rgb(100, 181, 123) 1px solid;
+      -webkit-animation: circle 1.5s  linear infinite;
+    }
+    
+    .circle2{
+      -webkit-animation-delay: 0.75s
+    }
+    
+    .pause .photo{
+        -webkit-animation-play-state: paused;
+    }
+    
+    .pause .circle{
+        visibility: hidden;
+        -webkit-animation-play-state: paused;
+    }
+    
+    @-webkit-keyframes rotate1{
+      0% {transform: rotateZ(0deg);}
+      50% {transform: rotateZ(180deg);}
+      100% {transform: rotateZ(360deg);}
+    }
+  
+    @-webkit-keyframes circle{
+      0% {transform: scale(1);   opacity: 1;}
+      80%,100% {transform: scale(1.4);   opacity: 0;}
+    } 
+    .container audio{
+      padding-left: 260px;
+    }
+  </style>
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/tian-tian/hello-world">View on GitHub</a>
-
-          <h1 id="project_title">Hello-world</h1>
-          <h2 id="project_tagline">test</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/tian-tian/hello-world/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/tian-tian/hello-world/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <div class="stage">
+      <div class="container">
+      <div class="content pause" id="content">
+        <div class="needle"></div>
+        <div class="photo" ></div>
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+      </div>
+      <audio id="music" controls="controls"src="http://yinyueshiting.baidu.com/data2/music/138426866/6550943050400128.mp3?xcode=e25a9c8e302d11ca0c486914f0acd7b6"></audio>
+      </div>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span class="octicon octicon-link"></span></a>hello-world</h1>
-
-<p>test 123</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Hello-world maintained by <a href="https://github.com/tian-tian">tian-tian</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    <script src="javascripts/main.js"></script>
-
+    <script>
+      var music = document.getElementById('music');
+      var content = document.getElementById('content');
+      music.addEventListener('play',function(){
+        content.setAttribute('class','content');
+      });
+      music.addEventListener('pause',function(){
+        content.setAttribute('class','content pause');
+      });
+    </script>
   </body>
 </html>
